@@ -1,0 +1,41 @@
+subprojects {
+    apply plugin: 'groovy'
+    apply plugin: 'idea'
+    apply plugin: 'maven'
+
+
+
+    [compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+
+    sourceSets {
+        main {
+            groovy.srcDirs = ['src/main/groovy']
+            java.srcDirs = []
+            resources.srcDirs = []
+        }
+
+        test {
+            groovy.srcDirs = ['src/test/groovy']
+            java.srcDirs = []
+            resources.srcDirs = []
+        }
+
+        resources {
+            groovy.srcDirs = []
+            java.srcDirs = []
+            resources.srcDirs = ['src/main/resources', 'src/test/resources']
+        }
+    }
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.4'
+}
+

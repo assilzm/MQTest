@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MQTestHtmlDemo</title>
+    <script type="text/javascript" src="js/jquery1.9.1.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".span3").mouseover(function () {
+                $(".span3").text("mouseover")
+            }).mouseout(function () {
+                $(".span3").text("mouseout")
+            });
+            $("#button5").click(function () {
+                $("#input5").val("clickbyjs")
+            });
+            $("#button6").click(function () {
+                $("#input6").val("click")
+            });
+            $("#span7").dblclick(function () {
+                $("#input7").val("dbclick")
+            });
+            $("#span8").dblclick(function () {
+                $("#input8").val("dbclickbyjs")
+            });
+            $("#input9").focus(function () {
+                $("#input9").val("focus")
+            }).blur(function () {
+                $("#input9").val("blur")
+            });
+        });
+        function comfirmFunction() {
+            var k = window.confirm('alert show');
+            $("#button18").val(k)
+        }
+    </script>
+</head>
+<body>
+<table id="table1" border="1">
+    <thead>
+    <th>some basic element</th>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <div id="div1">
+                <li id="li1">a li</li>
+                <a id="a1">some text</a>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span id="span2">
+                <li id="li2">a li</li>
+            </span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="div3">
+                <span class="span3">hover span</span>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="div4">
+                <input id="input4" type="text" value="default text"/>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="div5">
+                <input id="input5" type="text" value="default text"/>
+                <input id="button5" type="button" value="5"/>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="div6">
+                <input id="input6" type="text" value="default text"/>
+                <input id="button6" type="button" value="6"/>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="div7">
+                <input id="input7" type="text" value="default text"/>
+                <span style="background-color:blue" id="span7">span7</span>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="div8">
+                <input id="input8" type="text" value="default text"/>
+                <span style="background-color:blue" id="span8">span8</span>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="div9">
+                <input id="input9" type="text" value="default text"/>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="div10">
+                <input id="input10" type="text" value="default text"/>
+                <a id="a10" type="text" value="default text">remove</a>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="div11">
+                <input id="input11" type="text" value="default text" testValue="abc"/>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="div12">
+                <select id="select12">
+                    <option>1238</option>
+                    <option>24576</option>
+                    <option>357835</option>
+                </select>
+                <select id="list12" multiple="multiple">
+                    <option selected="selected">a</option>
+                    <option>bcd</option>
+                    <option selected="selected">efgh</option>
+                </select>
+                <select id="select12_2" multiple="multiple">
+                </select>
+                <select id="list12_2" multiple="multiple">
+                    <option>new york</option>
+                    <option>shanghai</option>
+                    <option>tokyo</option>
+                </select>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="div13">
+                <label>
+                    <input id="checkbox13_1" type="checkbox" checked="checked"/>
+                    checkbox checked
+                </label>
+                <label>
+                    <input id="checkbox13_2" type="checkbox"/>
+                    checkbox unchecked
+                </label>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="div14">
+                <label>
+                    <input id="radio14_1" type="radio" checked="checked"/>
+                    radio checked
+                </label>
+                <label>
+                    <input id="radio14_2" type="radio"/>
+                    radio unchecked
+                </label>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="div15">
+                <input id="input15" value="some texts1"/>
+                <a id="a15">some texts2</a>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="div16">
+                <input id="input16" setAttr="" setAttrs="" value="value1"/>
+                <a id="a16" value="value2" setAttrs="">some texts</a>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="div17">
+                <input type="button" value="new window" id="button17" onclick="window.open('window.html')"/>
+                <input type="button" value="button" id="button17_2" onclick="$(this).val('trigger')"/>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="div18">
+                <input type="button" value="comfirm" id="button18" onclick="comfirmFunction()"/>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<iframe id="frame1" src="frame1.html" frameborder="0" scrolling="auto" width="100%" height="100%">
+</iframe>
+
+</body>
+</html>
