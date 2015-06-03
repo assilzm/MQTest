@@ -1,7 +1,6 @@
 package base.model
 
 import base.exceptions.JavaScriptExecuteException
-import base.utils.ArgsCheckUtils
 import base.utils.LogUtils
 import base.utils.ProjectUtils
 import org.apache.log4j.Logger
@@ -12,7 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait
 
 import static TestContentManager.getCurrentJavascriptExecutor
 import static TestContentManager.getCurrentWebDriver
-import static base.model.JQModel.getJQUERY_PIX
 
 /**
  * JQuery工具类

@@ -1,11 +1,5 @@
 package base.browser
 
-import base.browser.*
-import base.browser.Browser
-import base.browser.Chrome
-import base.browser.Firefox
-import base.browser.InternetExplorer
-import base.browser.Phantomjs
 import base.emuns.BrowserType
 
 /**
