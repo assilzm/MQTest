@@ -1,7 +1,7 @@
 package base.emuns
 
 /**
- * ²Ù×÷ÏµÍ³Ã¶¾Ù
+ * ï¿½ï¿½ï¿½ï¿½ÏµÍ³Ã¶ï¿½ï¿½
  */
 enum OperationType{
     WINDOWS,MAC,LINUX

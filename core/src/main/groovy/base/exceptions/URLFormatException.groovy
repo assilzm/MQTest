@@ -1,7 +1,7 @@
 package base.exceptions
 
 /**
- * URL格式化异常
+ * URL锟斤拷式锟斤拷锟届常
  */
 class URLFormatException extends Exception {
     URLFormatException(String msg) {

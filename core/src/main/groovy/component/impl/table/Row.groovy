@@ -2,7 +2,7 @@ package component.impl.table
 
 /**
  * TODO:
- * ÐÐÀà
+ * ï¿½ï¿½ï¿½ï¿½
  */
 class Row {
 

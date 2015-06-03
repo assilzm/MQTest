@@ -1,7 +1,7 @@
 package base.exceptions
 
 /**
- * ÇÐ»»frameÒì³£
+ * ï¿½Ð»ï¿½frameï¿½ì³£
  */
 class SwitchFrameErrorException extends Exception {
     SwitchFrameErrorException(String msg) {

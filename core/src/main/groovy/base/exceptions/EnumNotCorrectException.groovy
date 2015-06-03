@@ -1,7 +1,7 @@
 package base.exceptions
 
 /**
- * Ã¶¾Ù´íÎóÒì³£
+ * Ã¶ï¿½Ù´ï¿½ï¿½ï¿½ï¿½ì³£
  */
 class EnumNotCorrectException extends Exception {
     EnumNotCorrectException(String msg) {

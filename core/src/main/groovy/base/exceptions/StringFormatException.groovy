@@ -1,7 +1,7 @@
 package base.exceptions
 
 /**
- * ×Ö·û´®¸ñÊ½»¯Òì³£
+ * ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ì³£
  */
 class StringFormatException extends Exception {
     StringFormatException(String msg) {

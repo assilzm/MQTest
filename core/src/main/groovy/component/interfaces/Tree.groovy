@@ -2,7 +2,7 @@ package component.interfaces
 
 /**
  * TODO:
- * ���ṹ�Ľӿڣ�
+ * 树结构的接口，
  */
 interface Tree {
 }

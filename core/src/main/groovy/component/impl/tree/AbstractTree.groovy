@@ -5,7 +5,7 @@ import component.interfaces.Tree
 
 /**
  * TODO:
- * Ê÷×é¼şµÄ³éÏóÀà
+ * æ ‘ç»„ä»¶çš„æŠ½è±¡ç±»
  */
 abstract class AbstractTree extends Component implements Tree{
 

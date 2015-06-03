@@ -5,12 +5,12 @@ import component.interfaces.Table
 
 /**
  * TODO:
- * ÁÐ±íµÄ³éÏóÀà
+ * ï¿½Ð±ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½
  */
 abstract class AbstractTable extends Component implements Table{
 
     /**
-     * ÁÐ±íÓÉÐÐ×é³É
+     * ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     List<Row> rows=new ArrayList<>()
 }
