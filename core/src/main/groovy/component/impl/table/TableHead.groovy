@@ -4,7 +4,12 @@ import component.Component
 /**
  * 列头
  */
-class Head extends Component{
+class TableHead extends Component{
 
     List<Cell> cells=new ArrayList<>()
+
+
+    Cell getHead(int headIndex){
+        return cells.get(headIndex-1)
+    }
 }

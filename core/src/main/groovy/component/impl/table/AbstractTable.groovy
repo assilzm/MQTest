@@ -12,20 +12,24 @@ abstract class AbstractTable extends Component implements Table{
     /**
      * 列头
      */
-    Head head=new Head()
+    TableHead tableHead=new TableHead()
 
     /**
      * 表体
      */
-    Body body=new Body()
+    TableBody tableBody=new TableBody()
 
 
-    Cell getCell(){
+    Cell getHead(int index){
+       return tableHead.getHead(index)
+    }
 
+    Cell getCell(int rowIndex,int columnIndex){
+        return getRow(rowIndex).getCell(columnIndex)
     }
 
     Row getRow(int index){
-
+        return getTableBody().getRow(index)
     }
 
 

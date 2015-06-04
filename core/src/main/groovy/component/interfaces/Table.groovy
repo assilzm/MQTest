@@ -1,5 +1,6 @@
 package component.interfaces
 
+import component.impl.table.Cell
 import component.impl.table.Row
 import org.openqa.selenium.WebElement
 
@@ -250,44 +251,12 @@ interface Table {
     WebElement getRowMainColumn(Map<String, String> map, boolean isUnique)
 
     /**
-     * 通过行列号获取单元格内的链接对象
-     * @param row 行号
-     * @param column 列号
-     * @return
-     */
-    WebElement getCellLink(int row, int column)
-
-    /**
-     * 根据列名与列值获取单元格内的链接对象
-     * @param header 标题
-     * @param displayText 显示文本
-     * @param isUnique 是否精确查找,默认为true
-     * @return
-     */
-    WebElement getCellLink(String header, String displayText, boolean isUnique)
-
-    /**
-     * 根据列名与列值获取单元格内的链接对象，精确查找
-     * @param header 标题
-     * @param displayText 显示文本
-     * @return
-     */
-    WebElement getCellLink(String header, String displayText)
-
-    /**
-     * 根据主列值获取单元格内的链接对象，精确查找
-     * @param displayText 显示文本
-     * @return
-     */
-    WebElement getCellLink(String displayText)
-
-    /**
      * 通过行列号获取单元格对象
      * @param row 行号
      * @param column 列号
      * @return
      */
-    WebElement getCell(int row, int column)
+    Cell getCell(int row, int column)
 
     /**
      * 根据列名与列值获取单元格对象

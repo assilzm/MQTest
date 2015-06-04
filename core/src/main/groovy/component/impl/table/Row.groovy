@@ -14,7 +14,7 @@ class Row extends Component{
     List<Cell> cells=new ArrayList<>()
 
 
-    Cell getCell(){
-
+    Cell getCell(int columnIndex){
+        return cells.get(columnIndex-1)
     }
 }
