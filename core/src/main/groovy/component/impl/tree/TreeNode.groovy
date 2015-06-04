@@ -1,12 +1,10 @@
 package component.impl.tree
 
-import base.model.BasicPage
-
-
+import component.Component
 /**
  * 树节点
  */
-class TreeNode extends BasicPage{
+class TreeNode extends Component{
 
     //TODO:其余属性待设计
 

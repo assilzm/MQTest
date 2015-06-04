@@ -1,5 +1,6 @@
 package component.interfaces
 
+import component.impl.table.Row
 import org.openqa.selenium.WebElement
 
 /**
@@ -65,7 +66,7 @@ interface Table {
      * @param row 行号
      * @return
      */
-    WebElement getRow(int row)
+    Row getRow(int row)
 
     /**
      * 取得某行行元素

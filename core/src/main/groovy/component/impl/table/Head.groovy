@@ -1,11 +1,10 @@
 package component.impl.table
 
-import base.model.BasicPage
-
+import component.Component
 /**
  * 列头
  */
-class Head extends BasicPage{
+class Head extends Component{
 
-    List<Cell> Cells=new ArrayList<>()
+    List<Cell> cells=new ArrayList<>()
 }

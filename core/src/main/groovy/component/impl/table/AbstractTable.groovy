@@ -20,4 +20,13 @@ abstract class AbstractTable extends Component implements Table{
     Body body=new Body()
 
 
+    Cell getCell(){
+
+    }
+
+    Row getRow(int index){
+
+    }
+
+
 }
