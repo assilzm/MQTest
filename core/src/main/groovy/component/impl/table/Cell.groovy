@@ -3,25 +3,25 @@ package component.impl.table
 import base.model.BasicPage
 
 /**
- * TOD:
- * ��Ԫ����
+ * TODO:
+ * 单元格
  */
 class Cell extends BasicPage{
 
     /**
-     * �кţ������Ҫ
+     * 行号
      */
     int rowNumber=-1
     /**
-     * �кţ������Ҫ
+     * 列号
      */
     int columnNumber=-1
     /**
-     * ��ͷ���ƣ������Ҫ
+     * 列头
      */
     String headName=null
     /**
-     * ��ͷ���ƣ������Ҫ����Ȼ���󳣼�����ʱ���⣬�������ǲ�����Ҫ�������
+     * 行头，如有的话
      */
     String rowName=null
 }

@@ -5,12 +5,19 @@ import component.interfaces.Table
 
 /**
  * TODO:
- * �б�ĳ�����
+ * 抽象的列表类
  */
 abstract class AbstractTable extends Component implements Table{
 
     /**
-     * �б��������
+     * 列头
      */
-    List<Row> rows=new ArrayList<>()
+    Head head=new Head()
+
+    /**
+     * 表体
+     */
+    Body body=new Body()
+
+
 }

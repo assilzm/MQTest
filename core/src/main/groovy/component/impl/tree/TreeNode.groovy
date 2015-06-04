@@ -4,11 +4,12 @@ import base.model.BasicPage
 
 
 /**
- * ���еĽڵ㣬�ڵ��а����ӽڵ�
+ * 树节点
  */
 class TreeNode extends BasicPage{
 
-    //TODO:�������Դ����
+    //TODO:其余属性待设计
 
+    //节点中依然可以包含节点
     List<TreeNode> subNodes=new ArrayList<>()
 }
