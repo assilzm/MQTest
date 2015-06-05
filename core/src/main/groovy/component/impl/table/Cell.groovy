@@ -1,6 +1,8 @@
 package component.impl.table
 
 import component.Component
+import org.openqa.selenium.WebElement
+
 /**
  * TODO:
  * 单元格
@@ -8,19 +10,47 @@ import component.Component
 class Cell extends Component {
 
     /**
-     * 行号
+     * 当前单元格的页面元素对象
      */
-    int rowNumber = -1
+    private WebElement element
+
+    /**
+     * 单元格显示的文本
+     */
+    private String text
+
     /**
      * 列号
      */
-    int columnNumber = -1
+    private int index = -1
+
     /**
-     * 列头
+     * 当前元素的选择器
      */
-    String headName = null
-    /**
-     * 行头，如有的话
-     */
-    String cellText = null
+    private String selector
+
+
+    Cell(String selector, int index) {
+        this.index = index
+        this.selector = "${selector}:eq(${this.index - 1})"
+        element = findElementByJQuery(selector)
+        text=getText(element)
+    }
+
+
+    WebElement getElement() {
+        return element
+    }
+
+    String getText() {
+        return text
+    }
+
+    int getIndex() {
+        return index
+    }
+
+    String getSelector() {
+        return selector
+    }
 }

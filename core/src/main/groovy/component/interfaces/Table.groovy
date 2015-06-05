@@ -265,7 +265,7 @@ interface Table {
      * @param isUnique 是否精确查找,默认为true
      * @return
      */
-    WebElement getCell(String header, String displayText, boolean isUnique)
+    Cell getCell(String header, String displayText, boolean isUnique)
 
     /**
      * 根据列名与列值获取单元格对象，精确查找
@@ -273,7 +273,7 @@ interface Table {
      * @param displayText 显示文本
      * @return
      */
-    WebElement getCell(String header, String displayText)
+    Cell getCell(String header, String displayText)
 
 
 
@@ -283,14 +283,14 @@ interface Table {
      * @param isUnique 是否精确查找
      * @return
      */
-    WebElement getCell(String displayText, boolean isUnique)
+    Cell getCell(String displayText, boolean isUnique)
 
     /**
      * 根据主列值获取单元格对象，精确查找
      * @param displayText 显示文本
      * @return
      */
-    WebElement getCell(String displayText)
+    Cell getCell(String displayText)
 
     /**
      * 根据列名与列值获取得多个单元格对象
@@ -298,7 +298,7 @@ interface Table {
      * @param displayText 显示文本
      * @param isUnique 是否精确查找,默认为true
      */
-    List<WebElement> getCells(String header, String displayText, boolean isUnique)
+    List<Cell> getCells(String header, String displayText, boolean isUnique)
 
     /**
      * 点击某单元格
