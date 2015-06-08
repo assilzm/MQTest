@@ -1,18 +1,20 @@
 package base.browser
+
 import base.exceptions.URLFormatException
 import base.model.TestContentManager
+import base.utils.TempCleanUtils
 import org.apache.log4j.Logger
+import org.openqa.selenium.Proxy
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.remote.Augmenter
 import org.openqa.selenium.remote.CapabilityType
 import org.openqa.selenium.remote.DesiredCapabilities
 import org.openqa.selenium.remote.RemoteWebDriver
-import org.openqa.selenium.Proxy
 
 import static TestContentManager.getCurrentWebDriver
 import static TestContentManager.setCurrentWebDriver
+import static base.utils.Timeout.waitFor
 import static org.openqa.selenium.Proxy.ProxyType.DIRECT
-
 /**
  * 浏览器基类
  */
@@ -132,5 +134,19 @@ abstract class AbstractBrowser implements Browser {
         def driver = new Augmenter().augment(new RemoteWebDriver(new URL("http://${url}:${port}"), configure()))
         maximize()
         setCurrentWebDriver(driver)
+    }
+
+    void exit(){
+        def driver = getCurrentWebDriver()
+        if (driver) {
+            waitFor(15, 10, false) {
+                driver.quit()
+                return true
+            }
+        }
+        setCurrentWebDriver(null)
+        if (BrowserFactory.isLocal()) {
+            TempCleanUtils.cleanTemp(BrowserFactory.type)
+        }
     }
 }

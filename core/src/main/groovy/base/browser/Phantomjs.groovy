@@ -1,14 +1,12 @@
 package base.browser
-import base.emuns.BrowserType
+
 import base.utils.LogUtils
 import base.utils.ProjectUtils
-import base.utils.TempCleanUtils
 import org.openqa.selenium.phantomjs.PhantomJSDriver
 import org.openqa.selenium.phantomjs.PhantomJSDriverService
 import org.openqa.selenium.remote.DesiredCapabilities
 
 import static base.model.TestContentManager.currentWebDriver
-
 /**
  * Phantomjs控制类
  */
@@ -21,16 +19,6 @@ class Phantomjs extends AbstractBrowser {
 
     Phantomjs(){
         logger = LogUtils.getLogger(Phantomjs)
-    }
-
-
-
-    void exit() {
-        getCurrentWebDriver().quit()
-        setCurrentWebDriver(null)
-        if (BrowserFactory.isLocal()) {
-            TempCleanUtils.cleanTemp(BrowserType.PHANTOMJS)
-        }
     }
 
 

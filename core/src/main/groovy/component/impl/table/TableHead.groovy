@@ -13,7 +13,6 @@ class TableHead extends Component{
 
     private String headSelector
 
-
     private List<Cell> cells=new ArrayList<>()
 
 

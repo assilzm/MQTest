@@ -1,9 +1,7 @@
 package base.browser
-import base.emuns.BrowserType
+
 import base.model.TestContentManager
 import base.utils.LogUtils
-import base.utils.TempCleanUtils
-import base.utils.Timeout
 import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.firefox.FirefoxProfile
 import org.openqa.selenium.remote.DesiredCapabilities
@@ -40,18 +38,4 @@ class Firefox extends AbstractBrowser implements Browser {
         ["firefox.exe"]
     }
 
-
-    void exit(){
-        def driver = TestContentManager.getCurrentWebDriver()
-        if (driver) {
-            Timeout.waitFor(15, 10, false) {
-                driver.quit()
-                return true
-            }
-        }
-        TestContentManager.setCurrentWebDriver(null)
-        if (BrowserFactory.isLocal()) {
-            TempCleanUtils.cleanTemp(BrowserType.FIREFOX)
-        }
-    }
 }

@@ -53,4 +53,8 @@ class Cell extends Component {
     String getSelector() {
         return selector
     }
+
+    void click(){
+        click(element)
+    }
 }

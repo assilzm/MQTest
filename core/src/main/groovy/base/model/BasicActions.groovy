@@ -20,7 +20,7 @@ import static base.utils.Timeout.waitFor
 /**
  * 基础的web页面操作封装
  */
-class BasicActions {
+abstract class BasicActions {
 
     /**
      * webdriver实例
@@ -53,7 +53,21 @@ class BasicActions {
      */
     private final static Logger logger = LogUtils.getLogger(BasicActions)
 
+    /**
+     * 设置driver实例
+     * @param driver
+     */
+    static void setDriver(WebDriver driver) {
+        this.driver = driver
+    }
 
+    /**
+     * 取得driver实例
+     * @return driver实例
+     */
+    static WebDriver getDriver() {
+        return driver
+    }
 
     /*****************************************元素的基本操作***************************************************/
 

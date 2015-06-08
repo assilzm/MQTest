@@ -1,18 +1,15 @@
 package base.browser
-import base.emuns.BrowserType
+
 import base.emuns.OperationType
 import base.utils.LogUtils
 import base.utils.OperationUtils
 import base.utils.ProjectUtils
-import base.utils.TempCleanUtils
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.remote.DesiredCapabilities
 
 import static base.asserts.Assert.assertNotNull
 import static base.model.TestContentManager.currentWebDriver
-import static base.utils.Timeout.waitFor
-
 /**
  * chrome控制类
  */
@@ -58,17 +55,4 @@ class Chrome extends AbstractBrowser {
     }
 
 
-    void exit() {
-        def driver = getCurrentWebDriver()
-        if (driver) {
-            waitFor(15, 10, false) {
-                driver.quit()
-                return true
-            }
-        }
-        setCurrentWebDriver(null)
-        if (BrowserFactory.isLocal()) {
-            TempCleanUtils.cleanTemp(BrowserType.CHROME)
-        }
-    }
 }

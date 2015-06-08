@@ -64,21 +64,7 @@ class BasicPage extends BasicActions{
 
     /***************************************对webdriverAPI的简单封装*******************************************/
 
-    /**
-     * 设置driver实例
-     * @param driver
-     */
-    static void setDriver(WebDriver driver) {
-        this.driver = driver
-    }
 
-    /**
-     * 取得driver实例
-     * @return driver实例
-     */
-    static WebDriver getDriver() {
-        return driver
-    }
 
     /**
      * 取得当前窗口标题
