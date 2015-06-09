@@ -489,7 +489,7 @@ abstract class BasicActions {
      * @return 选择的状态
      */
     boolean isElementSelected(WebElement el) {
-        assertElemenNotNull(el)
+        assertElementNotNull(el)
         return el.isSelected()
     }
 
@@ -535,7 +535,7 @@ abstract class BasicActions {
      * @param el 元素
      */
     void selectCheckBox(WebElement el) {
-        assertElemenNotNull(el)
+        assertElementNotNull(el)
         controlCheckbox(el, true)
     }
 
@@ -552,7 +552,7 @@ abstract class BasicActions {
      * @param el 元素
      */
     void unSelectCheckBox(WebElement el) {
-        assertElemenNotNull(el)
+        assertElementNotNull(el)
         controlCheckbox(el, false)
     }
 
@@ -589,7 +589,7 @@ abstract class BasicActions {
      * @return select元素的所有选项
      */
     List<WebElement> getOptions(WebElement el) {
-        assertElemenNotNull(el)
+        assertElementNotNull(el)
         return findElementsOfElementByJQuery(el, "option")
     }
 
@@ -664,7 +664,7 @@ abstract class BasicActions {
      * @return select元素的已选项
      */
     List<WebElement> getSelectedOptions(WebElement el) {
-        assertElemenNotNull(el)
+        assertElementNotNull(el)
         return findElementsOfElementByJQuery(el, "option:selected")
     }
 
@@ -674,7 +674,7 @@ abstract class BasicActions {
      * @return 元素的显示文本
      */
     String getText(String selector) {
-        return getAttribute(findElementByJQuery(selector))
+        return getText(findElementByJQuery(selector))
     }
 
     /**
@@ -692,7 +692,7 @@ abstract class BasicActions {
      * @return 元素的显示文本
      */
     String getText(WebElement el) {
-        assertElemenNotNull(el)
+        assertElementNotNull(el)
         return getAttribute(el, "text")
     }
 
@@ -702,7 +702,7 @@ abstract class BasicActions {
      * @return 元素的显示文本列表
      */
     List<String> getTexts(List<WebElement> els) {
-        assertElemenNotNull(els)
+        assertElementNotNull(els)
         List<String> texts = new ArrayList<>()
         els.each {
             texts.add(getText(it))
@@ -726,7 +726,7 @@ abstract class BasicActions {
      * @param attrName 属性名，如为text,则取得显示文本
      * @return 属性值，如不存在返回null
      */
-    String getAttribute(WebElement el, String attrName = "text") {
+    String getAttribute(WebElement el, String attrName) {
         List<String> values = getAttributes([el], attrName)
         return values?.size() ? values.get(0) : null
     }
@@ -757,17 +757,36 @@ abstract class BasicActions {
      * @param attrName 属性名，如为text,则设置显示文本
      * @param attrValue 需要设置的属性值
      */
-    List<String> getAttributes(String selector, String attrName = "text") {
+    List<String> getAttributes(String selector, String attrName) {
         return getAttributes(findElementsByJQuery(selector), attrName)
     }
 
     /**
-     * 设置多个元素的属性值
+     * 取得某元素多个子元素的属性值
+     * @param selector 被查找的元素的选择器
+     * @param subElementSelector 子元素选择器
+     * @param attrName 属性名，如为text,则设置显示文本
+     */
+    List<String> getAttributes(String selector, String subElementSelector, String attrName) {
+        return getAttributes(findElementByJQuery(selector),subElementSelector,attrName)
+    }
+
+    /**
+     * 取得某元素多个子元素的属性值
+     * @param el 被查找的元素
+     * @param subElementSelector 子元素选择器
+     * @param attrName 属性名，如为text,则设置显示文本
+     */
+    List<String> getAttributes(WebElement el, String subElementSelector, String attrName = "text") {
+        return getAttributes(findElementsOfElementByJQuery(el,subElementSelector),attrName)
+    }
+
+    /**
+     * 取得多个元素的属性值
      * @param els 元素的列表
      * @param attrName 属性名，如为text,则设置显示文本
-     * @param attrValue 需要设置的属性值
      */
-    List<String> getAttributes(List<WebElement> els, String attrName = "text") {
+    List<String> getAttributes(List<WebElement> els, String attrName) {
         List<String> attrs = new ArrayList<String>()
         List<String> retValues = (List<String>) executeScript(createAttrSelector(WEB_ELEMENT_ARGUMENT, attrName), els)
         if (retValues != null)
@@ -794,7 +813,7 @@ abstract class BasicActions {
      * @param attrValue 需要设置的属性值
      */
     void setAttributes(List<WebElement> els, String attrName, Object attrValue) {
-        assertElemenNotNull(els)
+        assertElementNotNull(els)
         executeScript(createAttrSelector(WEB_ELEMENT_ARGUMENT, attrName, attrValue), els)
     }
 
@@ -814,7 +833,7 @@ abstract class BasicActions {
      */
     void flash(WebElement el, int times = FLASH_ELEMENT_TIMEOUT_IN_SECONDS) {
         if (times > 0) {
-            assertElemenNotNull(el)
+            assertElementNotNull(el)
             String attributeName = "style"
             String oldStyle = getAttribute(el, attributeName)
             try {
@@ -877,7 +896,7 @@ abstract class BasicActions {
      * @param evt 事件名称
      */
     void trigger(WebElement el, EventType evt) {
-        assertElemenNotNull(el)
+        assertElementNotNull(el)
         String function = ".trigger('${evt.value}')"
         executeScriptIfCanUseLocalJQuery(el, function)
     }
@@ -898,7 +917,7 @@ abstract class BasicActions {
      * @param function 需要执行的方法
      */
     private Object executeScriptIfCanUseLocalJQuery(WebElement el, String function) {
-        assertElemenNotNull(el)
+        assertElementNotNull(el)
         String jString = createJQueryString(WEB_ELEMENT_ARGUMENT)
         return executeScript("return $jString$function;", el)
     }
@@ -923,7 +942,7 @@ abstract class BasicActions {
      * @param tagNames 期望的标签名列表
      */
     void expectElementTagName(String message , WebElement el, String... tagNames) {
-        assertElemenNotNull(el)
+        assertElementNotNull(el)
         String elTagName = el.getTagName().toLowerCase()
         assertObjectInList(message, elTagName, tagNames.toList())
     }
@@ -947,7 +966,7 @@ abstract class BasicActions {
      * @param tagNames 期望的属性值列表
      */
     void expectElementValue(String message, WebElement el, String attribute, String... tagNames) {
-        assertElemenNotNull(el)
+        assertElementNotNull(el)
         String value = getAttribute(el, attribute)
         assertObjectInList(message, value, tagNames.toList())
     }
@@ -955,14 +974,14 @@ abstract class BasicActions {
     /**
      * 断言要操作的元素必须存在
      */
-    void assertElemenNotNull(WebElement el) {
+    void assertElementNotNull(WebElement el) {
         assertNotNull("要进行操作的元素必须存在", el)
     }
 
     /**
      * 断言要操作的元素必须存在
      */
-    void assertElemenNotNull(List<WebElement> els) {
+    void assertElementNotNull(List<WebElement> els) {
         assertNotNull("要进行操作的元素必须存在", els)
     }
     /** ******************************************************************************************************/

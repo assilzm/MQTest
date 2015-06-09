@@ -1,4 +1,5 @@
 package base.model
+
 import base.exceptions.SwitchFrameErrorException
 import base.utils.LogUtils
 import base.utils.StringUtils
@@ -12,17 +13,16 @@ import static StringUtils.stringHasAllListString
 import static base.asserts.Assert.*
 import static base.utils.StringUtils.getList
 import static base.utils.Timeout.waitFor
+
 /**
  * 抽象的web页面
  */
-class BasicPage extends BasicActions{
+class BasicPage extends BasicActions {
 
     /**
      * logger实例
      */
     private final static Logger logger = LogUtils.getLogger(BasicPage)
-
-
 
     /*****************************************默认参数***********************************************************/
 
@@ -57,14 +57,11 @@ class BasicPage extends BasicActions{
     static boolean IS_FORCE_SWITCH_FRAME = false
 
 
-
     private final static String UUID_MATCHER = /^[0-9a-z]{8}(-[0-9a-z]{4}){3}-[0-9a-z]{12}$/
 
     /** ******************************************************************************************************/
 
     /***************************************对webdriverAPI的简单封装*******************************************/
-
-
 
     /**
      * 取得当前窗口标题
@@ -195,7 +192,7 @@ class BasicPage extends BasicActions{
     }
 
     /**
-     * TODO:更加只能的frame切换，不需要再指定是否强制切换frame
+     * TODO:更智能的frame切换，不需要再指定是否强制切换frame
      * 切换到frame
      * @param frameSelectorList frame列表,如["#frame1",".frame2”,"#frame3"]，如为null或者空，则切换到最外层
      * @param forceSwitch 如为false，当前frame为目标frame，则不切换。如为true，当前frame为目标frame，也会强制切换。
@@ -306,7 +303,6 @@ class BasicPage extends BasicActions{
 
     /** ******************************************************************************************************/
 
-
     /*********************************************窗口操作****************************************************/
 
     /**
@@ -316,7 +312,7 @@ class BasicPage extends BasicActions{
      * @return webdriver的实例
      */
     WebDriver switchWindow(String displayTitleOrHandle, int timeoutInSeconds = SWITCH_WINDOW_TIMEOUT_IN_SECONDS) {
-        switchWindow([displayTitleOrHandle],  timeoutInSeconds)
+        switchWindow([displayTitleOrHandle], timeoutInSeconds)
     }
 
     /**
@@ -355,7 +351,7 @@ class BasicPage extends BasicActions{
      * @param timeoutInSeconds 超时时间
      * @return webdriver的实例
      */
-    private WebDriver switchWindowByHandle(String windowHandle, int timeoutInSeconds = SWITCH_WINDOW_TIMEOUT_IN_SECONDS) {
+    protected WebDriver switchWindowByHandle(String windowHandle, int timeoutInSeconds = SWITCH_WINDOW_TIMEOUT_IN_SECONDS) {
         waitFor(timeoutInSeconds, 100) {
             driver.switchTo().window(windowHandle)
             logger.debug("切换到窗口：" + getTitle())
@@ -370,7 +366,7 @@ class BasicPage extends BasicActions{
      * @param byRegex 是否正则匹配
      * @return webdriver的实例
      */
-    private boolean isTargetWindowIsCurrentWindow(List<String> targetWindowTitles, boolean byRegex = false) {
+    protected boolean isTargetWindowIsCurrentWindow(List<String> targetWindowTitles, boolean byRegex = false) {
         try {
             String currentTitle = getTitle()
             if (stringHasAllListString(
@@ -387,27 +383,13 @@ class BasicPage extends BasicActions{
     }
 
     /**
-     * 如果当前窗口为目标窗口，停留在当前窗口。如不是，则抛出异常
-     * @param targetWindowTitles 窗口标题包含的文本或者正则表达式列表
-     * @param byRegex 是否正则匹配
-     * @return webdriver的实例
-     */
-    private WebDriver stayInWindow(List<String> targetWindowTitles, boolean byRegex = false) {
-        println "2"
-        if (isTargetWindowIsCurrentWindow(targetWindowTitles, byRegex))
-            return driver
-        else
-            throw new WebDriverException("当前窗口[${getTitle()}]不是目标窗口[${targetWindowTitles.join(",")}].")
-    }
-
-    /**
      * 切换到窗口公用方法
      * @param displayTitleOrHandle 用于匹配窗口标题的正则表达式或者部分文本的列表
      * @param byRegex 是否正则匹配
      * @param timeoutInSeconds 超时时间
      * @return webdriver的实例
      */
-    private WebDriver switchWindowMethod(List<String> displayTitleOrHandle, boolean byRegex, int timeoutInSeconds) {
+    protected WebDriver switchWindowMethod(List<String> displayTitleOrHandle, boolean byRegex, int timeoutInSeconds) {
 
         boolean hasWindow = false
         assertNotNull("必须指定要切换到的窗口信息", displayTitleOrHandle)
@@ -417,12 +399,10 @@ class BasicPage extends BasicActions{
             else {
                 List<String> currentHandles = getWindowHandles()
                 assertGreater(currentHandles.size(), 0)
-                logger.debug(getWindowHandles())
                 if (!(getWindowHandle() in currentHandles))
                     driver.switchTo().window(currentHandles.get(0))
-                currentHandles.size() == 1 ?
-                        stayInWindow(displayTitleOrHandle, byRegex) :
-                        switchToOtherWindow(displayTitleOrHandle, byRegex)
+                if (!isTargetWindowIsCurrentWindow(displayTitleOrHandle, byRegex))
+                    switchToOtherWindow(displayTitleOrHandle, byRegex)
             }
             hasWindow = true
             return true
@@ -440,7 +420,7 @@ class BasicPage extends BasicActions{
      * @param byRegex 是否正则匹配
      * @return webdriver的实例
      */
-    private WebDriver switchToOtherWindow(List<String> displayTitles, boolean byRegex = false) {
+    protected WebDriver switchToOtherWindow(List<String> displayTitles, boolean byRegex = false) {
         boolean hasSwitched = false
         Set<String> allHandles = new HashSet<>()
         String currentHandle = getWindowHandle()
@@ -450,7 +430,7 @@ class BasicPage extends BasicActions{
             allHandles.remove(currentHandle)
         for (String handle : allHandles) {
             driver.switchTo().window(handle)
-            logger.debug("已换到窗口：" + handle + "\t窗口标题：" + driver.getTitle() + "\t当前URL：" + driver.getCurrentUrl())
+            logger.debug("已切换到窗口：" + handle + "\t窗口标题：" + driver.getTitle() + "\t当前URL：" + driver.getCurrentUrl())
             if (stringHasAllListString(
                     driver.getTitle(),
                     displayTitles, byRegex)) {
