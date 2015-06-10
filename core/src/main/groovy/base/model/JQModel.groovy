@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait
 
 import static TestContentManager.getCurrentJavascriptExecutor
 import static TestContentManager.getCurrentWebDriver
+import static base.utils.StringUtils.formatString
 
 /**
  * JQuery工具类
@@ -151,7 +152,7 @@ class JQModel {
      */
     static String createAttrSelector(String selector,String attrName = "text", Object attrValue = null) {
         String value = attrValue instanceof String ?
-                "\"$attrValue\"" : attrValue
+                "\"${formatString(attrValue)}\"" : attrValue
         return "var attrName = \"$attrName\";\n" +
                 "var attrValue = $value;\n" +
                 "var arr = [];\n" +
