@@ -1,19 +1,15 @@
 package base.model
-
 import base.exceptions.SwitchFrameErrorException
 import base.utils.LogUtils
 import base.utils.StringUtils
 import base.utils.TimerUtils
 import org.apache.log4j.Logger
 import org.openqa.selenium.*
-import org.openqa.selenium.support.ui.ExpectedConditions
-import org.openqa.selenium.support.ui.WebDriverWait
 
 import static StringUtils.stringHasAllListString
 import static base.asserts.Assert.*
 import static base.utils.StringUtils.getList
 import static base.utils.Timeout.waitFor
-
 /**
  * 抽象的web页面
  */
@@ -450,8 +446,13 @@ class BasicPage extends BasicActions {
      * 等待alert出现并切换到alert
      * @return alert的实例
      */
-    Alert waitForAlert(int timeoutInSeconds = SWITCH_ALERT_TIMEOUT_IN_SECONDS) {
-        return new WebDriverWait(driver, timeoutInSeconds, 100).until(ExpectedConditions.alertIsPresent())
+   static Alert switchToAlert(int timeoutInSeconds = SWITCH_ALERT_TIMEOUT_IN_SECONDS) {
+        Alert alert=null
+        waitFor(timeoutInSeconds,500){
+            alert=driver.switchTo().alert()
+            return true
+        }
+        return alert
     }
 
     /**
@@ -459,8 +460,8 @@ class BasicPage extends BasicActions {
      * @param timeoutInSeconds 超时时间，默认值为{@link #SWITCH_ALERT_TIMEOUT_IN_SECONDS}
      * @return alert的提示文本
      */
-    String acceptAlert(int timeoutInSeconds = SWITCH_ALERT_TIMEOUT_IN_SECONDS) {
-        Alert alert = waitForAlert(timeoutInSeconds)
+    static String acceptAlert(int timeoutInSeconds = SWITCH_ALERT_TIMEOUT_IN_SECONDS) {
+        Alert alert = switchToAlert(timeoutInSeconds)
         String text = getAlertText(alert)
         alert.accept()
         return text
@@ -471,14 +472,14 @@ class BasicPage extends BasicActions {
      * @param timeoutInSeconds 超时时间，默认值为{@link #SWITCH_ALERT_TIMEOUT_IN_SECONDS}
      * @return alert的提示文本
      */
-    String dismissAlert(int timeoutInSeconds = SWITCH_ALERT_TIMEOUT_IN_SECONDS) {
-        Alert alert = waitForAlert(timeoutInSeconds)
+    static String dismissAlert(int timeoutInSeconds = SWITCH_ALERT_TIMEOUT_IN_SECONDS) {
+        Alert alert = switchToAlert(timeoutInSeconds)
         String text = getAlertText(alert)
         alert.dismiss()
         return text
     }
 
-    String getAlertText(Alert alert) {
+    static String getAlertText(Alert alert) {
         String text = alert.getText()
         logger.debug("alert提示文本：" + text)
         return text

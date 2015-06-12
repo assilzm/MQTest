@@ -361,7 +361,16 @@ abstract class BasicActions {
      * @param optionText 需要选择的项目文本
      */
     void select(String selector, String optionText) {
-        select(findElementByJQuery(selector), [optionText])
+        select(findElementByJQuery(selector), optionText)
+    }
+
+    /**
+     * 在select元素中选择某个选项
+     * @param el 元素
+     * @param optionText 需要选择的项目文本
+     */
+    void select(WebElement el, String optionText) {
+        select(el, [optionText])
     }
 
     /**
@@ -777,7 +786,7 @@ abstract class BasicActions {
      * @param subElementSelector 子元素选择器
      * @param attrName 属性名，如为text,则设置显示文本
      */
-    List<String> getAttributes(WebElement el, String subElementSelector, String attrName = "text") {
+    List<String> getAttributes(WebElement el, String subElementSelector, String attrName) {
         return getAttributes(findElementsOfElementByJQuery(el,subElementSelector),attrName)
     }
 
@@ -825,6 +834,8 @@ abstract class BasicActions {
     void flash(String selector, int times = FLASH_ELEMENT_TIMEOUT_IN_SECONDS) {
         flash(findElementByJQuery(selector), times)
     }
+
+
 
     /**
      * 让元素闪烁

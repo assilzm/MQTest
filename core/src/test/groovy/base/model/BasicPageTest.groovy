@@ -359,6 +359,11 @@ class BasicPageTest {
     }
 
     @Test
+    void testGetAttributesInElement() {
+        assertListEquals(basicPage.getAttributes("#select12","option", "value"), ["1", "2","3"])
+    }
+
+    @Test
     void testSetAttributes() {
         String testAttribute = "setAttrs"
         String testValue = "value set"
