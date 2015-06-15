@@ -1,4 +1,5 @@
 package base.model
+
 import base.exceptions.SwitchFrameErrorException
 import base.utils.LogUtils
 import base.utils.StringUtils
@@ -10,6 +11,7 @@ import static StringUtils.stringHasAllListString
 import static base.asserts.Assert.*
 import static base.utils.StringUtils.getList
 import static base.utils.Timeout.waitFor
+
 /**
  * 抽象的web页面
  */
@@ -432,6 +434,7 @@ class BasicPage extends BasicActions {
                     displayTitles, byRegex)) {
                 waitForPageLoad()
                 hasSwitched = true
+                break
             }
         }
         if (hasSwitched) return driver
@@ -446,10 +449,10 @@ class BasicPage extends BasicActions {
      * 等待alert出现并切换到alert
      * @return alert的实例
      */
-   static Alert switchToAlert(int timeoutInSeconds = SWITCH_ALERT_TIMEOUT_IN_SECONDS) {
-        Alert alert=null
-        waitFor(timeoutInSeconds,500){
-            alert=driver.switchTo().alert()
+    static Alert switchToAlert(int timeoutInSeconds = SWITCH_ALERT_TIMEOUT_IN_SECONDS) {
+        Alert alert = null
+        waitFor(timeoutInSeconds, 500) {
+            alert = driver.switchTo().alert()
             return true
         }
         return alert
