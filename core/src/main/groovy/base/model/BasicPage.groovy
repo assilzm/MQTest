@@ -141,7 +141,7 @@ class BasicPage extends BasicActions {
      * @return webdriver的示例
      */
     WebDriver switchFrame(String frameSelectors, int timeoutInSecondsPerFrame = SWITCH_FRAME_TIMEOUT_IN_SECONDS) {
-        switchFrame(getList(frameSelectors, FRAME_SEPARATOR), IS_FORCE_SWITCH_FRAME)
+        switchFrame(getList(frameSelectors, FRAME_SEPARATOR), IS_FORCE_SWITCH_FRAME,timeoutInSecondsPerFrame)
     }
 
     /**
