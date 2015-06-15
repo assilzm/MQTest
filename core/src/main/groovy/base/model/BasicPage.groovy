@@ -55,7 +55,7 @@ class BasicPage extends BasicActions {
     static boolean IS_FORCE_SWITCH_FRAME = false
 
 
-    private final static String UUID_MATCHER = /^[0-9a-z]{8}(-[0-9a-z]{4}){3}-[0-9a-z]{12}$/
+    private final static String UUID_MATCHER = /^(?:cdwindow-)?[0-9a-z]{8}(-[0-9a-z]{4}){3}-[0-9a-z]{12}$/
 
     /** ******************************************************************************************************/
 
@@ -392,7 +392,7 @@ class BasicPage extends BasicActions {
         boolean hasWindow = false
         assertNotNull("必须指定要切换到的窗口信息", displayTitleOrHandle)
         waitFor(timeoutInSeconds, 500, false) {
-            if (displayTitleOrHandle.size() == 1 && displayTitleOrHandle.get(0) ==~ UUID_MATCHER)
+            if (displayTitleOrHandle.size() == 1 && displayTitleOrHandle.get(0).toLowerCase() ==~ UUID_MATCHER)
                 switchWindowByHandle(displayTitleOrHandle.get(0))
             else {
                 List<String> currentHandles = getWindowHandles()
