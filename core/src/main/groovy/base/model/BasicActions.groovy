@@ -423,6 +423,7 @@ abstract class BasicActions {
     void selectByRegex(WebElement el, List<Pattern> optionPatterns) {
         expectElementTagName("type方法仅对input,textarea元素生效，您提供的元素为[${el.getProperties()}]", el, "select")
         List<WebElement> options = getOptions(el)
+        List<String> optionTexts = new ArrayList<>()
         List<String> selectedOptions = new ArrayList<>()
         if (!(getAttribute(el, "multiple") == "multiple")) {
             click(el)
@@ -431,6 +432,7 @@ abstract class BasicActions {
             assertNotNull("要选中的内容必须存在", pattern)
             for (int i in 0..<options.size()) {
                 String optionText = getText(options.get(i))
+                optionTexts.add(optionText)
                 if (optionText =~ pattern) {
                     selectedOptions.add(optionText)
                     if (!isElementSelected(options.get(i)))
@@ -440,7 +442,7 @@ abstract class BasicActions {
             }
         }
         if (selectedOptions.size() != optionPatterns.size())
-            throw new NoSuchElementException("元素中包含如下选项：${options.toString()},需要选中的选项[${optionPatterns.join(",")}],只选中了${selectedOptions.toString()}。")
+            throw new NoSuchElementException("元素中包含如下选项：${optionTexts.toString()},需要选中的选项[${optionPatterns.join(",")}],只选中了${selectedOptions.toString()}。")
     }
 
     /**

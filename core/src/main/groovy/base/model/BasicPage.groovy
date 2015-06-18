@@ -124,7 +124,7 @@ class BasicPage extends BasicActions {
      * 换到上一级frame
      * @return webdriver的示例
      */
-    protected WebDriver switchToParentFrame() {
+    WebDriver switchToParentFrame() {
         if (framePath?.size() > 0) {
             framePath.pop()
             driver.switchTo().parentFrame()
@@ -250,7 +250,7 @@ class BasicPage extends BasicActions {
      * @param frame frame元素
      * @return webdriver的实例
      */
-    protected WebDriver switchToFrame(WebElement frame) {
+    WebDriver switchToFrame(WebElement frame) {
         return driver.switchTo().frame(frame)
     }
 
@@ -260,7 +260,7 @@ class BasicPage extends BasicActions {
      * @param timeoutInSeconds 超时值
      * @return webdriver的实例
      */
-    protected WebDriver switchToFrame(String frameSelector, int timeoutInSeconds = SWITCH_FRAME_TIMEOUT_IN_SECONDS) {
+     WebDriver switchToFrame(String frameSelector, int timeoutInSeconds = SWITCH_FRAME_TIMEOUT_IN_SECONDS) {
         boolean hasSwitched = false
         waitFor(timeoutInSeconds, 100, false) {
             if (frameSelector) {
@@ -280,7 +280,7 @@ class BasicPage extends BasicActions {
         if (!hasSwitched && frameSelector)
             throw new NoSuchFrameException("切换到[$frameSelector]出错")
         if (!hasSwitched && !frameSelector)
-            throw new NoSuchFrameException("切换到最外层Frame出错")
+            throw new NoSuchFrameException("切换到最外层frame出错")
         logger.debug("已切换到frame[${frameSelector}]")
         return driver
     }
