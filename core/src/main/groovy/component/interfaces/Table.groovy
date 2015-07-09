@@ -55,7 +55,6 @@ interface Table {
      * 根据列名与列值获取得多个单元格对象
      * @param header 标题
      * @param displayText 显示文本
-     * @param isUnique 是否精确查找,默认为true
      */
     List<Cell> getCells(String header, String displayText)
 
